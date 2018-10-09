@@ -6,16 +6,22 @@ class ContactHelper:
     def create(self, contact):
         wd = self.app.wd
         self.open_contact_page()
-        # fill contact from
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.firstname)
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(contact.middlename)
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(contact.lastname)
+        self.fill_contact_from(contact)
         # submit creation contact
         wd.find_element_by_name("submit").click()
+
+    def fill_contact_from(self, contact):
+        wd = self.app.wd
+        self.type("firstname", contact.firstname)
+        self.type("middlename", contact.middlename)
+        self.type("lastname", contact.lastname)
+
+    def type(self, field_name, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(text)
 
     def open_contact_page(self):
         wd = self.app.wd
@@ -30,17 +36,10 @@ class ContactHelper:
         # submit deletion
         wd.switch_to_alert().accept()
 
-    def edit(self):
+    def modifay_first_contact(self, new_contact_data):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys("zxc")
-        wd.find_element_by_name("middlename").click()
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys("zxc")
-        wd.find_element_by_name("lastname").click()
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys("zxc")
+        self.fill_contact_from(new_contact_data)
         wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
+
