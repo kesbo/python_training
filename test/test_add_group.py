@@ -6,7 +6,6 @@ def test_add_group(app):
     app.group.create(Group(name="asdf", header="asdf", footer="asdf"))
 
 
-
 def test_add_epty_group(app):
     app.group.create(Group(name="", header="", footer=""))
 
