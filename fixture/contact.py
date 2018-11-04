@@ -53,7 +53,7 @@ class ContactHelper:
         wd = self.app.wd
         self.open_home_page()
         wd.find_elements_by_name("selected[]")[index].click()
-        wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
+        wd.find_elements_by_css_selector("img[alt=\"Edit\"]")[index].click()
         self.fill_contact_from(new_contact_data)
         wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
         self.contact_cache = None
