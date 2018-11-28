@@ -29,11 +29,11 @@ def random_string(prefix, maxlen):
 
 
 testdata = [Contact(firstname="", lastname="", address="",
-                      phone_home="", phone_mobile="", phone_work="",
+                      home="", mobile="", work="",
                       email="", email2="", email3="")] + [
     Contact(firstname=random_string("first_name", 10), lastname=random_string("header", 20),
-            address=random_string("address", 20), phone_home=random_string("phone_home", 20),
-            phone_mobile=random_string("phone_mobile", 20), phone_work=random_string("phone_work", 20),
+            address=random_string("address", 20), home=random_string("phone_home", 20),
+            mobile=random_string("phone_mobile", 20), work=random_string("phone_work", 20),
             email=random_string("email", 20), email2=random_string("email2", 20),
             email3=random_string("email3", 20))
     for i in range(n)

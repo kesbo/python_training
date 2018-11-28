@@ -10,22 +10,22 @@ class ContactHelper:
         self.fill_contact_form(contact)
 
     def fill_contact_form(self, contact):
-        self.change_field_valuee("firstname", contact.first_name)
-        self.change_field_valuee("lastname", contact.last_name)
+        self.change_field_valuee("firstname", contact.firstname)
+        self.change_field_valuee("lastname", contact.lastname)
         self.change_field_valuee("address", contact.address)
-        self.change_field_valuee("home", contact.phone_home)
-        self.change_field_valuee("mobile", contact.phone_mobile)
-        self.change_field_valuee("work", contact.phone_work)
+        self.change_field_valuee("home", contact.home)
+        self.change_field_valuee("mobile", contact.mobile)
+        self.change_field_valuee("work", contact.work)
         self.change_field_valuee("email", contact.email)
         self.change_field_valuee("email2", contact.email2)
         self.change_field_valuee("email3", contact.email3)
 
-    def change_field_valuee(self, field_name, text):
+    def change_field_valuee(self, fieldname, text):
         wd = self.app.wd
         if text is not None:
-            wd.find_element_by_name(field_name).click()
-            wd.find_element_by_name(field_name).clear()
-            wd.find_element_by_name(field_name).send_keys(text)
+            wd.find_element_by_name(fieldname).click()
+            wd.find_element_by_name(fieldname).clear()
+            wd.find_element_by_name(fieldname).send_keys(text)
 
     def create(self, contact):
         wd = self.app.wd
@@ -115,8 +115,8 @@ class ContactHelper:
         email = wd.find_element_by_name("email").get_attribute("value")
         email2 = wd.find_element_by_name("email2").get_attribute("value")
         email3 = wd.find_element_by_name("email3").get_attribute("value")
-        return Contact(firstname=first_name, lastname=last_name, id=id, phone_home=phone_home,
-                       phone_mobile=phone_mobile, phone_work=phone_work, email=email, email2=email2, email3=email3)
+        return Contact(firstname=first_name, lastname=last_name, id=id, home=phone_home,
+                       mobile=phone_mobile, work=phone_work, email=email, email2=email2, email3=email3)
 
     def get_contact_view_page(self, index):
         wd = self.app.wd
@@ -126,5 +126,5 @@ class ContactHelper:
         phone_mobile = re.search("M: (.*)", text).group(1)
         phone_work = re.search("W: (.*)", text).group(1)
         all_emails = wd.find_elements_by_css_selector('a[href*="mailto:email"]')
-        return Contact(phone_home=phone_home,
-                       phone_mobile=phone_mobile, phone_work=phone_work, all_emails_from_view_page=all_emails)
+        return Contact(home=phone_home,
+                       mobile=phone_mobile, work=phone_work, all_emails_from_view_page=all_emails)

@@ -3,17 +3,17 @@ from sys import maxsize
 
 class Contact:
 
-    def __init__(self, firstname=None, lastname=None, address=None, phone_home=None,
-                 phone_mobile=None, phone_work=None, phone_secondary=None, email=None,
+    def __init__(self, firstname=None, lastname=None, address=None, home=None,
+                 mobile=None, work=None, phone2=None, email=None,
                  email2=None, email3=None, id=None, all_phones_home_page=None, all_emails_home_page=None,
                  all_emails_from_view_page=None):
-        self.first_name = firstname
-        self.last_name = lastname
+        self.firstname = firstname
+        self.lastname = lastname
         self.address = address
-        self.phone_home = phone_home
-        self.phone_mobile = phone_mobile
-        self.phone_work = phone_work
-        self.phone_secondary = phone_secondary
+        self.home = home
+        self.mobile = mobile
+        self.work = work
+        self.phone2 = phone2
         self.email = email
         self.email2 = email2
         self.email3 = email3
@@ -23,10 +23,11 @@ class Contact:
         self.id = id
 
     def __repr__(self):
-        return "%s:%s:%s" % (self.id, self.first_name, self.last_name)
+        return "%s:%s:%s" % (self.id, self.firstname, self.lastname)
 
     def __eq__(self, other):
-        return (self.id is None or other.id is None or self.id == other.id) and self.first_name == other.first_name and self.last_name == other.last_name
+        return (self.id is None or other.id is None or self.id == other.id) and self.firstname == other.firstname and\
+               self.lastname == other.lastname
 
     def id_or_max(self):
         if self.id:
