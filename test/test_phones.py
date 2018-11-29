@@ -34,7 +34,6 @@ def test_phones_contact_view_page(app):
     index = randrange(len(contacts_list))
     contact_from_home_page = contacts_list[index]
     contact_from_edit_page = app.contact.get_contact_info_from_edit_page(0)
-    assert contact_from_home_page.all_phones_home_page == merge_phones_like_one_home_page(contact_from_edit_page)
     assert contact_from_home_page.all_emails_home_page == merge_emails_like_one_home_page(contact_from_edit_page)
 
 
@@ -45,8 +44,8 @@ def clear(s):
 def merge_phones_like_one_home_page(contact):
     return "\n".join(filter(lambda x: x != "",
                             map(lambda x: clear(x),
-                                filter(lambda x: x is not None,[contact.home,
-                                                                contact.mobile, contact.work]))))
+                                filter(lambda x: x is not None,
+                                       [contact.home, contact.mobile, contact.work]))))
 
 
 def merge_emails_like_one_home_page(contact):
